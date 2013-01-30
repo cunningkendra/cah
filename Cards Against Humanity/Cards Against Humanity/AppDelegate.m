@@ -1,14 +1,18 @@
 //
-//  CKCAppDelegate.m
+//  AppDelegate.m
 //  Cards Against Humanity
 //
 //  Created by Kendra Cunningham on 2013-01-28.
 //  Copyright (c) 2013 Kendra Cunningham. All rights reserved.
 //
 
-#import "CKCAppDelegate.h"
+#import "AppDelegate.h"
+#import "MainViewController.h"
 
-@implementation CKCAppDelegate
+@implementation AppDelegate
+
+@synthesize window = _window;
+@synthesize viewController = _viewController;
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
@@ -16,10 +20,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	self.viewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+	self.window.rootViewController = self.viewController;
+    
     [self.window makeKeyAndVisible];
+    [application setIdleTimerDisabled:YES];
     return YES;
 }
 
