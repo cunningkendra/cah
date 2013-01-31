@@ -57,11 +57,11 @@
 						<double key="IBUITitleEdgeInsets.left">0.0</double>
 						<double key="IBUITitleEdgeInsets.right">0.0</double>
 						<string key="IBUINormalTitle">Host Game</string>
-						<object class="NSColor" key="IBUIHighlightedTitleColor" id="667842929">
+						<object class="NSColor" key="IBUIHighlightedTitleColor" id="1056505634">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC4zMzMzMzMzMzMzAA</bytes>
 						</object>
-						<object class="NSColor" key="IBUINormalTitleColor" id="331948952">
+						<object class="NSColor" key="IBUINormalTitleColor" id="285152535">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MAA</bytes>
 						</object>
@@ -99,8 +99,8 @@
 						<double key="IBUITitleEdgeInsets.left">0.0</double>
 						<double key="IBUITitleEdgeInsets.right">0.0</double>
 						<string key="IBUINormalTitle">Join Game</string>
-						<reference key="IBUIHighlightedTitleColor" ref="667842929"/>
-						<reference key="IBUINormalTitleColor" ref="331948952"/>
+						<reference key="IBUIHighlightedTitleColor" ref="1056505634"/>
+						<reference key="IBUINormalTitleColor" ref="285152535"/>
 						<reference key="IBUINormalTitleShadowColor" ref="309168988"/>
 						<object class="IBUIFontDescription" key="IBUIFontDescription" id="77170974">
 							<int key="type">2</int>
@@ -125,13 +125,13 @@
 						<double key="IBUITitleEdgeInsets.left">0.0</double>
 						<double key="IBUITitleEdgeInsets.right">0.0</double>
 						<string key="IBUINormalTitle">Single Player</string>
-						<reference key="IBUIHighlightedTitleColor" ref="667842929"/>
-						<reference key="IBUINormalTitleColor" ref="331948952"/>
+						<reference key="IBUIHighlightedTitleColor" ref="1056505634"/>
+						<reference key="IBUINormalTitleColor" ref="285152535"/>
 						<reference key="IBUINormalTitleShadowColor" ref="309168988"/>
 						<reference key="IBUIFontDescription" ref="77170974"/>
 						<reference key="IBUIFont" ref="344799210"/>
 					</object>
-					<object class="IBUILabel" id="244628966">
+					<object class="IBUILabel" id="105225291">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{56, 47}, {368, 60}}</string>
@@ -197,14 +197,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">hostGameButton</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="386710216"/>
-					</object>
-					<int key="connectionID">11</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">joinGameButton</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="1059255306"/>
@@ -223,9 +215,17 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">logo</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="244628966"/>
+						<reference key="destination" ref="105225291"/>
 					</object>
 					<int key="connectionID">25</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">hostGameButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="386710216"/>
+					</object>
+					<int key="connectionID">27</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -234,7 +234,7 @@
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">8</int>
+					<int key="connectionID">26</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -270,7 +270,7 @@
 							<reference ref="386710216"/>
 							<reference ref="1059255306"/>
 							<reference ref="491277030"/>
-							<reference ref="244628966"/>
+							<reference ref="105225291"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -302,7 +302,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">24</int>
-						<reference key="object" ref="244628966"/>
+						<reference key="object" ref="105225291"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>
@@ -328,7 +328,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">25</int>
+			<int key="maxID">27</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

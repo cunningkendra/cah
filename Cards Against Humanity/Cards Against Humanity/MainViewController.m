@@ -114,18 +114,36 @@
 {
 	_buttonsEnabled = NO;
     
-        
-    [UIView animateWithDuration:0.3f
-                          delay:0.3f
+	[UIView animateWithDuration:0.3f
+                          delay:0.0f
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^
-    {
-        self.logo.alpha = 0.0f;
-        self.hostGameButton.alpha = 0.0f;
-        self.joinGameButton.alpha = 0.0f;
-        self.singlePlayerGameButton.alpha = 0.0f;
-    }
-                    completion:nil];
+     {
+
+     }
+                     completion:^(BOOL finished)
+     {
+         [UIView animateWithDuration:1.0f
+                               delay:0.0f
+                             options:UIViewAnimationOptionCurveEaseOut
+                          animations:^
+          {
+
+          }
+                          completion:block];
+         
+         [UIView animateWithDuration:0.3f
+                               delay:0.3f
+                             options:UIViewAnimationOptionCurveEaseOut
+                          animations:^
+          {
+              self.logo.alpha = 0.0f;
+              self.hostGameButton.alpha = 0.0f;
+              self.joinGameButton.alpha = 0.0f;
+              self.singlePlayerGameButton.alpha = 0.0f;
+          }
+                          completion:nil];
+     }];
 
 }
 
