@@ -16,4 +16,4 @@
 #endif
 
 // The name of the GameKit session.
-#define SESSION_ID @"Cards Against Humanity!"
+#define SESSION_ID @"CardsAgainstHumanity!"

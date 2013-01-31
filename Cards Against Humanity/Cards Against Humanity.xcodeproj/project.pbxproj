@@ -282,10 +282,10 @@
 		0A0CCB1416B9D11900754657 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				0A0CCB1016B9D11400754657 /* MatchmakingServer.h */,
-				0A0CCB1116B9D11500754657 /* MatchmakingServer.m */,
 				0A0CCB1516B9D1F300754657 /* MatchmakingClient.h */,
 				0A0CCB1616B9D1F300754657 /* MatchmakingClient.m */,
+				0A0CCB1016B9D11400754657 /* MatchmakingServer.h */,
+				0A0CCB1116B9D11500754657 /* MatchmakingServer.m */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
