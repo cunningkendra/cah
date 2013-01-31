@@ -17,3 +17,12 @@
 
 // The name of the GameKit session.
 #define SESSION_ID @"CardsAgainstHumanity!"
+
+typedef enum
+{
+	QuitReasonNoNetwork,          // no Wi-Fi or Bluetooth
+	QuitReasonConnectionDropped,  // communication failure with server
+	QuitReasonUserQuit,           // the user terminated the connection
+	QuitReasonServerQuit,         // the server quit the game (on purpose)
+}
+QuitReason;

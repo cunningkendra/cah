@@ -24,6 +24,7 @@
 @implementation JoinViewController
 {
 	MatchmakingClient *_matchmakingClient;
+    QuitReason _quitReason;
 }
 
 @synthesize delegate = _delegate;
@@ -36,13 +37,6 @@
 
 @synthesize waitView = _waitView;
 @synthesize waitLabel = _waitLabel;
-
-- (void)dealloc
-{
-#ifdef DEBUG
-	NSLog(@"dealloc %@", self);
-#endif
-}
 
 - (void)viewDidLoad
 {
@@ -65,6 +59,8 @@
     
 	if (_matchmakingClient == nil)
 	{
+        _quitReason = QuitReasonConnectionDropped;
+        
 		_matchmakingClient = [[MatchmakingClient alloc] init];
         _matchmakingClient.delegate = self;
 		[_matchmakingClient startSearchingForServersWithSessionID:SESSION_ID];
@@ -87,6 +83,8 @@
 
 - (IBAction)exitAction:(id)sender
 {
+	_quitReason = QuitReasonUserQuit;
+	[_matchmakingClient disconnectFromServer];
 	[self.delegate joinViewControllerDidCancel:self];
 }
 
@@ -132,6 +130,36 @@
 - (void)matchmakingClient:(MatchmakingClient *)client serverBecameUnavailable:(NSString *)peerID
 {
 	[self.tableView reloadData];
+}
+
+- (void)matchmakingClient:(MatchmakingClient *)client didDisconnectFromServer:(NSString *)peerID
+{
+	_matchmakingClient.delegate = nil;
+	_matchmakingClient = nil;
+	[self.tableView reloadData];
+	[self.delegate joinViewController:self didDisconnectWithReason:_quitReason];
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+	if (_matchmakingClient != nil)
+	{
+		[self.view addSubview:self.waitView];
+        
+		NSString *peerID = [_matchmakingClient peerIDForAvailableServerAtIndex:indexPath.row];
+		[_matchmakingClient connectToServerWithPeerID:peerID];
+	}
+}
+
+- (void)dealloc
+{
+    #ifdef DEBUG
+	NSLog(@"dealloc %@", self);
+    #endif
 }
 
 @end
