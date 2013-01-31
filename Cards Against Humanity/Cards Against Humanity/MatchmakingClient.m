@@ -129,6 +129,12 @@ ClientState;
 					[self.delegate matchmakingClient:self serverBecameUnavailable:peerID];
 				}
 			}
+            
+            // Is this the server we're currently trying to connect with?
+			if (_clientState == ClientStateConnecting && [peerID isEqualToString:_serverPeerID])
+			{
+				[self disconnectFromServer];
+			}
 			break;
             
             // You're now connected to the server.
@@ -173,6 +179,15 @@ ClientState;
 #ifdef DEBUG
 	NSLog(@"MatchmakingClient: session failed %@", error);
 #endif
+    
+	if ([[error domain] isEqualToString:GKSessionErrorDomain])
+	{
+		if ([error code] == GKSessionCannotEnableError)
+		{
+			[self.delegate matchmakingClientNoNetwork:self];
+			[self disconnectFromServer];
+		}
+	}
 }
 
 @end
