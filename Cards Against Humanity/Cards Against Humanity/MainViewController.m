@@ -7,6 +7,7 @@
 @interface MainViewController ()
 
 @property (nonatomic, weak) IBOutlet UILabel *logo;
+@property (nonatomic, weak) IBOutlet UILabel *subLogo;
 
 @property (nonatomic, weak) IBOutlet UIButton *hostGameButton;
 @property (nonatomic, weak) IBOutlet UIButton *joinGameButton;
@@ -19,6 +20,7 @@
 }
 
 @synthesize logo = _logo;
+@synthesize subLogo = _subLogo;
 
 @synthesize hostGameButton = _hostGameButton;
 @synthesize joinGameButton = _joinGameButton;
@@ -28,7 +30,8 @@
 {
 	[super viewDidLoad];
     
-    self.logo.font = [UIFont cardsFontWithSize:30.0f];
+    self.logo.font = [UIFont cardsFontWithSize:36.0f];
+    self.subLogo.font = [UIFont cardsFontWithSize:20.0f];
     
 	[self.hostGameButton applyCardsStyle];
 	[self.joinGameButton applyCardsStyle];
@@ -100,6 +103,7 @@
 - (void)prepareForIntroAnimation
 {
     self.logo.alpha = 0.0f;
+    self.subLogo.alpha = 0.0f;
     self.hostGameButton.alpha = 0.0f;
 	self.joinGameButton.alpha = 0.0f;
 	self.singlePlayerGameButton.alpha = 0.0f;
@@ -115,6 +119,7 @@
                      animations:^
      {
          self.logo.alpha = 1.0f;
+         self.subLogo.alpha = 1.0f;
          self.hostGameButton.alpha = 1.0f;
          self.joinGameButton.alpha = 1.0f;
          self.singlePlayerGameButton.alpha = 1.0f;
@@ -153,6 +158,7 @@
                           animations:^
           {
               self.logo.alpha = 0.0f;
+              self.subLogo.alpha = 0.0f;
               self.hostGameButton.alpha = 0.0f;
               self.joinGameButton.alpha = 0.0f;
               self.singlePlayerGameButton.alpha = 0.0f;

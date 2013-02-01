@@ -12,7 +12,7 @@
 
 + (id)cardsFontWithSize:(CGFloat)size
 {
-	return [UIFont fontWithName:@"Lucida Grande" size:size];
+	return [UIFont fontWithName:@"LucidaGrande-Bold" size:size];
 }
 
 @end
