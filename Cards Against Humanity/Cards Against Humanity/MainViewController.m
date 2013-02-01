@@ -1,4 +1,5 @@
 
+#import "Game.h"
 #import "MainViewController.h"
 #import "UIButton+CardsAdditions.h"
 #import "UIFont+CardsAdditions.h"
@@ -13,6 +14,9 @@
 @end
 
 @implementation MainViewController
+{
+    BOOL _performAnimations;
+}
 
 @synthesize logo = _logo;
 
@@ -35,19 +39,30 @@
 {
 	[super viewWillAppear:animated];
     
-	[self prepareForIntroAnimation];
+	if (_performAnimations)
+		[self prepareForIntroAnimation];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
     
-	[self performIntroAnimation];
+	if (_performAnimations)
+		[self performIntroAnimation];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]))
+	{
+		_performAnimations = YES;
+	}
+	return self;
 }
 
 - (IBAction)hostGameAction:(id)sender
@@ -147,6 +162,19 @@
 
 }
 
+#pragma mark - GameViewControllerDelegate
+
+- (void)gameViewController:(GameViewController *)controller didQuitWithReason:(QuitReason)reason
+{
+	[self dismissViewControllerAnimated:NO completion:^
+     {
+         if (reason == QuitReasonConnectionDropped)
+         {
+             [self showDisconnectedAlert];
+         }
+     }];
+}
+
 #pragma mark - HostViewControllerDelegate
 
 - (void)hostViewControllerDidCancel:(HostViewController *)controller
@@ -162,11 +190,41 @@
 	}
 }
 
+- (void)hostViewController:(HostViewController *)controller startGameWithSession:(GKSession *)session playerName:(NSString *)name clients:(NSArray *)clients
+{
+	_performAnimations = NO;
+    
+	[self dismissViewControllerAnimated:NO completion:^
+     {
+         _performAnimations = YES;
+         
+         [self startGameWithBlock:^(Game *game)
+          {
+              [game startServerGameWithSession:session playerName:name clients:clients];
+          }];
+     }];
+}
+
 #pragma mark - JoinViewControllerDelegate
 
 - (void)joinViewControllerDidCancel:(JoinViewController *)controller
 {
 	[self dismissViewControllerAnimated:NO completion:nil];
+}
+
+- (void)joinViewController:(JoinViewController *)controller startGameWithSession:(GKSession *)session playerName:(NSString *)name server:(NSString *)peerID
+{
+	_performAnimations = NO;
+    
+	[self dismissViewControllerAnimated:NO completion:^
+     {
+         _performAnimations = YES;
+         
+         [self startGameWithBlock:^(Game *game)
+          {
+              [game startClientGameWithSession:session playerName:name server:peerID];
+          }];
+     }];
 }
 
 - (void)joinViewController:(JoinViewController *)controller didDisconnectWithReason:(QuitReason)reason
@@ -206,6 +264,20 @@
                               otherButtonTitles:nil];
     
 	[alertView show];
+}
+
+- (void)startGameWithBlock:(void (^)(Game *))block
+{
+	GameViewController *gameViewController = [[GameViewController alloc] initWithNibName:@"GameViewController" bundle:nil];
+	gameViewController.delegate = self;
+    
+	[self presentViewController:gameViewController animated:NO completion:^
+     {
+         Game *game = [[Game alloc] init];
+         gameViewController.game = game;
+         game.delegate = gameViewController;
+         block(game);
+     }];
 }
 
 - (void)dealloc

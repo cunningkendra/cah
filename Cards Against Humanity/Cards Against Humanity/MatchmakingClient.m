@@ -137,13 +137,15 @@ ClientState;
 			}
 			break;
             
-            // You're now connected to the server.
+            // We're now connected to the server.
 		case GKPeerStateConnected:
 			if (_clientState == ClientStateConnecting)
 			{
 				_clientState = ClientStateConnected;
+				[self.delegate matchmakingClient:self didConnectToServer:peerID];
 			}
 			break;
+            
             
             // You're now no longer connected to the server.
 		case GKPeerStateDisconnected:

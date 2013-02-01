@@ -6,10 +6,11 @@
 //  Copyright (c) 2013 Kendra Cunningham. All rights reserved.
 //
 
+#import "GameViewController.h"
 #import "HostViewController.h"
 #import "JoinViewController.h"
 
-@interface MainViewController : UIViewController <HostViewControllerDelegate, JoinViewControllerDelegate>
+@interface MainViewController : UIViewController <HostViewControllerDelegate, JoinViewControllerDelegate, GameViewControllerDelegate>
 {
     BOOL _buttonsEnabled;    
 }
